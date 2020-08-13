@@ -19,10 +19,10 @@ package js
 import (
 	"encoding/hex"
 	"syscall/js"
-	"unicode"
 
 	"github.com/hajimehoshi/ebiten/internal/driver"
 	"github.com/hajimehoshi/ebiten/internal/jsutil"
+	"github.com/hajimehoshi/ebiten/internal/uidriver"
 )
 
 type pos struct {
@@ -310,7 +310,7 @@ func (i *Input) Update(e js.Value) {
 		}
 		i.keyDown(cs)
 	case "keypress":
-		if r := rune(e.Get("charCode").Int()); unicode.IsPrint(r) {
+		if r := rune(e.Get("charCode").Int()); uidriver.IsPrintRune(r) {
 			i.runeBuffer = append(i.runeBuffer, r)
 		}
 	case "keyup":

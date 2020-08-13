@@ -17,9 +17,9 @@ package ebitenmobileview
 import (
 	"encoding/hex"
 	"hash/crc32"
-	"unicode"
 
 	"github.com/hajimehoshi/ebiten/internal/driver"
+	"github.com/hajimehoshi/ebiten/internal/uidriver"
 	"github.com/hajimehoshi/ebiten/internal/uidriver/mobile"
 )
 
@@ -233,7 +233,7 @@ func OnKeyDownOnAndroid(keyCode int, unicodeChar int, source int, deviceID int) 
 	case source&sourceKeyboard == sourceKeyboard:
 		if key, ok := androidKeyToDriverKey[keyCode]; ok {
 			keys[key] = struct{}{}
-			if r := rune(unicodeChar); r != 0 && unicode.IsPrint(r) {
+			if r := rune(unicodeChar); r != 0 && uidriver.IsPrintRune(r) {
 				runes = []rune{r}
 			}
 			updateInput()

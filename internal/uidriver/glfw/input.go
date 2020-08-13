@@ -21,10 +21,10 @@ package glfw
 
 import (
 	"sync"
-	"unicode"
 
 	"github.com/hajimehoshi/ebiten/internal/driver"
 	"github.com/hajimehoshi/ebiten/internal/glfw"
+	"github.com/hajimehoshi/ebiten/internal/uidriver"
 )
 
 type gamePad struct {
@@ -297,7 +297,7 @@ var glfwMouseButtonToMouseButton = map[glfw.MouseButton]driver.MouseButton{
 
 func (i *Input) appendRuneBuffer(char rune) {
 	// As this function is called from GLFW callbacks, the current thread is main.
-	if !unicode.IsPrint(char) {
+	if !uidriver.IsPrintRune(char) {
 		return
 	}
 	i.runeBuffer = append(i.runeBuffer, char)

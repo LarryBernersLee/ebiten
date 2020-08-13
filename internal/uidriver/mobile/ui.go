@@ -21,7 +21,6 @@ import (
 	"fmt"
 	"runtime/debug"
 	"sync"
-	"unicode"
 
 	"golang.org/x/mobile/app"
 	"golang.org/x/mobile/event/key"
@@ -36,6 +35,7 @@ import (
 	"github.com/hajimehoshi/ebiten/internal/graphicsdriver/opengl"
 	"github.com/hajimehoshi/ebiten/internal/hooks"
 	"github.com/hajimehoshi/ebiten/internal/thread"
+	"github.com/hajimehoshi/ebiten/internal/uidriver"
 )
 
 var (
@@ -217,7 +217,7 @@ func (u *UserInterface) appMain(a app.App) {
 
 			switch e.Direction {
 			case key.DirPress, key.DirNone:
-				if e.Rune != -1 && unicode.IsPrint(e.Rune) {
+				if e.Rune != -1 && uidriver.IsPrintRune(e.Rune) {
 					runes = []rune{e.Rune}
 				}
 			}
